@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oisín Cahalane — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f5f2ec;
+    --accent: #c1440e;
+    --mid: #6b6560;
+    --rule: #d6d0c8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* HEADER */
+  header {
+    border-bottom: 3px double var(--ink);
+    padding: 3rem 2rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .dateline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .byline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--mid);
+    text-transform: uppercase;
+    border-top: 1px solid var(--rule);
+    padding-top: 0.75rem;
+    margin-top: 1rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .byline a { color: var(--accent); }
+  .byline a:hover { text-decoration: underline; }
+
+  .bio-strip {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .bio-item { font-size: 0.82rem; color: var(--mid); line-height: 1.5; }
+  .bio-item strong {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+
+  /* NAV TABS */
+  nav {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    border-bottom: 1px solid var(--rule);
+    overflow-x: auto;
+  }
+
+  nav a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    padding: 1rem 1.2rem;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  nav a:hover, nav a.active { color: var(--ink); border-bottom-color: var(--accent); }
+
+  /* SECTIONS */
+  .section { max-width: 900px; margin: 0 auto; padding: 0 2rem 4rem; display: none; }
+  .section.active { display: block; }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2.5rem 0 0;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+  /* ARTICLE INDEX CARDS */
+  .article-index { border-bottom: 1px solid var(--rule); padding: 1.8rem 0; }
+
+  .article-index .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.63rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .article-index h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+  }
+
+  .article-index p { font-size: 0.85rem; color: var(--mid); line-height: 1.65; max-width: 620px; margin-bottom: 0.9rem; }
+
+  .read-btn {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--ink);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    border: none;
+  }
+  .read-btn:hover { background: var(--accent); }
+
+  .read-link {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 1px;
+  }
+  .read-link:hover { opacity: 0.7; }
+
+  /* FULL ARTICLE VIEW */
+  .article-full {
+    display: none;
+    padding: 2.5rem 0 4rem;
+  }
+  .article-full.active { display: block; }
+
+  .back-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    border: none;
+    background: none;
+    padding: 0;
+    transition: color 0.15s;
+  }
+  .back-btn:hover { color: var(--accent); }
+
+  .article-full .art-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+
+  .article-full h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+    max-width: 700px;
+  }
+
+  .article-full .rule {
+    border: none;
+    border-top: 2px solid var(--ink);
+    margin-bottom: 2rem;
+  }
+
+  .article-body {
+    max-width: 640px;
+    font-size: 1rem;
+    line-height: 1.85;
+    color: #1e1c1a;
+  }
+
+  .article-body p + p { margin-top: 1.1em; }
+
+  .article-body .drop-cap::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.8rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.1em;
+    margin-top: 0.1em;
+    color: var(--accent);
+  }
+
+  /* GRID */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0 3rem; }
+  .two-col .article-index:nth-child(odd) { border-right: 1px solid var(--rule); padding-right: 2rem; }
+
+  /* TIKTOK */
+  .tiktok-hero {
+    margin-top: 2rem;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+  }
+  .tiktok-hero h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 1rem; line-height: 1.2; }
+  .tiktok-hero p { font-size: 0.88rem; line-height: 1.75; color: #c8c4bc; max-width: 500px; }
+  .tiktok-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: var(--paper);
+    padding: 0.9rem 1.8rem;
+    white-space: nowrap;
+    display: inline-block;
+    transition: background 0.15s, color 0.15s;
+  }
+  .tiktok-btn:hover { background: var(--accent); color: var(--paper); }
+  .tiktok-stats { display: flex; gap: 2.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .tiktok-stat strong { display: block; font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--paper); margin-bottom: 0.1rem; }
+  .tiktok-stat span { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: #888; }
+
+  footer { max-width: 900px; margin: 0 auto; padding: 1.5rem 2rem; font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: var(--mid); letter-spacing: 0.08em; text-transform: uppercase; border-top: 1px solid var(--rule); }
+
+  @media (max-width: 600px) {
+    .bio-strip, .two-col, .tiktok-hero { grid-template-columns: 1fr; }
+    .two-col .article-index:nth-child(odd) { border-right: none; padding-right: 0; }
+    .tiktok-hero { padding: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="dateline">Writing Portfolio &nbsp;·&nbsp; Oisín Cahalane &nbsp;·&nbsp; 2025–2026</div>
+  <h1>Politics. Europe.<br>Explained.</h1>
+  <div class="byline">
+    <span>Journalist &amp; Content Creator</span>
+    <span>London, United Kingdom</span>
+    <a href="mailto:oisincahalane@gmail.com">oisincahalane@gmail.com</a>
+    <a href="https://www.linkedin.com/in/oisincahalane" target="_blank">LinkedIn</a>
+  </div>
+</header>
+
+<div class="bio-strip">
+  <div class="bio-item"><strong>Background</strong>NCTJ Diploma candidate at PA Media Academy. BA Theoretical Physics, Trinity College Dublin (2.1).</div>
+  <div class="bio-item"><strong>Focus</strong>EU affairs, geopolitics, defence policy, and the intersection of technology with politics.</div>
+  <div class="bio-item"><strong>Experience</strong>Project Newsroom Europe (European Academy Berlin) · TikTok · The Irish News · PwC</div>
+</div>
+
+<nav>
+  <a class="active" onclick="showSection('geopolitics', this)">AI &amp; Geopolitics</a>
+  <a onclick="showSection('nctj', this)">NCTJ Portfolio</a>
+  <a onclick="showSection('irishnews', this)">The Irish News</a>
+  <a onclick="showSection('tiktok', this)">TikTok</a>
+</nav>
+
+<!-- ===== AI & GEOPOLITICS ===== -->
+<div class="section active" id="geopolitics">
+
+  <!-- INDEX VIEW -->
+  <div id="geo-index">
+    <div class="section-label">AI &amp; Geopolitics Writing</div>
+
+    <div class="article-index">
+      <div class="tag">British Politics &nbsp;·&nbsp; Essay</div>
+      <h3>Britain's Most Powerful Man Can't Win the Algorithm</h3>
+      <p>Keir Starmer commands a commanding parliamentary majority and a fractured opposition — and yet remains deeply unpopular. The answer lies not in policy, but in how modern political legitimacy is now formed online.</p>
+      <button class="read-btn" onclick="openArticle('starmer')">Read Article →</button>
+    </div>
+
+    <div class="article-index">
+      <div class="tag">Europe &amp; Technology &nbsp;·&nbsp; Analysis</div>
+      <h3>Regulating the Future While Others Build It: Why Europe Risks Losing the AI Century</h3>
+      <p>The EU has positioned itself as the global leader in AI regulation — but at a time when the US and China are building and scaling AI at speed, Europe risks becoming a rule-maker without real influence over the technology it seeks to constrain.</p>
+      <button class="read-btn" onclick="openArticle('ai')">Read Article →</button>
+    </div>
+
+    <div class="article-index">
+      <div class="tag">Security &amp; Democracy &nbsp;·&nbsp; Opinion</div>
+      <h3>The Silence Is the Scandal: Nathan Gill, Russia, and Britain's Dangerous Complacency</h3>
+      <p>If a senior politician were jailed for links to hostile foreign interests during the Cold War, it would have triggered a national reckoning. The jailing of Nathan Gill passed with barely a ripple — and that silence should alarm us.</p>
+      <button class="read-btn" onclick="openArticle('gill')">Read Article →</button>
+    </div>
+
+    <div class="article-index">
+      <div class="tag">European Union &nbsp;·&nbsp; Essay</div>
+      <h3>The Greatest Challenge Facing the EU in 2025</h3>
+      <p>The clearest challenge facing the EU in 2025 was coming to terms with the reality that it can no longer take its alliance with the United States for granted. Written for Project Newsroom Europe, European Academy Berlin.</p>
+      <button class="read-btn" onclick="openArticle('eu2025')">Read Article →</button>
+    </div>
+
+    <div class="article-index">
+      <div class="tag">Technology &nbsp;·&nbsp; Reported Feature</div>
+      <h3>AI Moves Into Advisory Compliance as Financial Firms Automate Reporting</h3>
+      <p>Reported through original interviews with industry sources, this piece examines how firms like UK startup Templi are using generative AI to support — rather than replace — professional judgement in financial services.</p>
+      <button class="read-btn" onclick="openArticle('templi')">Read Article →</button>
+    </div>
+  </div>
+
+  <!-- FULL ARTICLE: STARMER -->
+  <div class="article-full" id="art-starmer">
+    <button class="back-btn" onclick="closeArticle()">← Back to articles</button>
+    <div class="art-tag">British Politics &nbsp;·&nbsp; Essay</div>
+    <h2>Britain's Most Powerful Man Can't Win the Algorithm</h2>
+    <hr class="rule">
+    <div class="article-body">
+      <p class="drop-cap">Keir Starmer is one of the most powerful British prime ministers in recent history. Armed with a commanding parliamentary majority and facing a fractured opposition, his Labour government has a level of institutional strength many of his predecessors could only envy. And yet, Starmer remains deeply unpopular with the public. Polling consistently shows high dissatisfaction ratings, weak personal favourability, and a striking lack of emotional connection with voters, including many who supported Labour at the ballot box. This disconnect raises a pressing question: how can a leader with such political dominance struggle so visibly to win public affection?</p>
+      <p>Part of the answer lies not in policy, but in communication. In an era where politics is increasingly shaped by algorithms, attention economies, and short-form content, Starmer's cautious, traditional media strategy looks increasingly out of step. One clear route to improving his popularity lies in a more confident and creative use of social media, something that smaller parties and newer political figures, such as Green Party leader Zack Polanski, have embraced with far greater success.</p>
+      <p>Starmer's unpopularity is not merely anecdotal; it is measurable and persistent. Recent polling has placed dissatisfaction with his performance at historically high levels, with a majority of respondents expressing a negative view of his leadership. Crucially, this dissatisfaction cuts across traditional party lines. While Conservative voters might be expected to view a Labour prime minister unfavourably, the more troubling trend for Starmer is the cooling enthusiasm among Labour supporters themselves. Many describe him as competent but uninspiring, a damning combination in a political environment that rewards clarity, conviction and emotional resonance.</p>
+      <p>To be fair, Starmer's governing style is deliberate by design. After years of political chaos, Labour campaigned on stability, seriousness and restraint. That approach helped deliver electoral success. However, what works in an election campaign does not necessarily translate into sustained public engagement once in office. The careful language, legalistic phrasing and risk-averse messaging that define Starmer's public persona often fail to cut through a noisy media landscape dominated by outrage, personality and immediacy.</p>
+      <p>This is where Labour's communication strategy begins to look outdated. Much of the government's messaging still relies on press briefings, long-form interviews and formal statements — channels that increasingly reach only politically engaged audiences. For younger voters, and for those who consume news passively through social feeds, these methods are simply insufficient. Politics today is not just reported; it is encountered, shared, remixed and debated online. Leaders who fail to engage directly in these spaces risk appearing distant, opaque or irrelevant.</p>
+      <p>In contrast, figures such as Zack Polanski have demonstrated how effective social media can be as a political tool. Despite representing a much smaller party, Polanski has managed to generate outsized attention through confident, visually engaging and emotionally direct online content. His videos are designed for the platforms they inhabit: short, bold, values-driven and easily shareable. He speaks plainly, takes clear positions, and understands that social media is not about perfect messaging, but about presence and authenticity.</p>
+      <p>This does not mean Starmer should mimic the tone or politics of the Green Party. However, there are clear lessons to be learned. A more effective social media strategy for Starmer would prioritise regular short-form video explaining government decisions in accessible language, rather than relying on journalists to translate policy after the fact. It would show more of the person behind the office — unscripted moments, behind-the-scenes insights, and direct responses to public concerns. Most importantly, it would treat social media as a space for engagement, not simply broadcast.</p>
+      <p>There is also a narrative problem that better digital communication could help address. Many voters struggle to articulate what Starmer stands for beyond general competence. Social media excels at reinforcing simple, repeatable narratives — whether about housing reform, cost-of-living measures or public service investment. Without this narrative clarity, even meaningful policy achievements risk going unnoticed, drowned out by louder voices online.</p>
+      <p>Critics may argue that governing is not a popularity contest, or that social media trivialises serious politics. But this misunderstands the nature of modern political legitimacy. Public trust is shaped by visibility and understanding as much as by outcomes. If voters do not see, hear or emotionally register what a government is doing, its achievements carry little political weight. Communication is not a distraction from governance; it is a core component of it.</p>
+      <p>Keir Starmer does not suffer from a lack of power, nor from an absence of policy ambition. What he lacks is a compelling connection with the public in the spaces where political identities are now formed. By continuing to govern as though traditional media alone can sustain public consent, he risks allowing frustration and disengagement to harden into lasting unpopularity. A more confident embrace of social media will not solve every political challenge he faces, but without it, the gap between authority and affection is likely to grow wider still.</p>
+    </div>
+  </div>
+
+  <!-- FULL ARTICLE: AI -->
+  <div class="article-full" id="art-ai">
+    <button class="back-btn" onclick="closeArticle()">← Back to articles</button>
+    <div class="art-tag">Europe &amp; Technology &nbsp;·&nbsp; Analysis</div>
+    <h2>Regulating the Future While Others Build It: Why Europe Risks Losing the AI Century</h2>
+    <hr class="rule">
+    <div class="article-body">
+      <p class="drop-cap">Artificial intelligence is rapidly becoming the defining political and economic force of the 21st century. From military planning and intelligence analysis to healthcare, education and productivity growth, AI is not merely another technological innovation — it is an infrastructure of power. Yet as the United States and China race to dominate this new frontier, Europe finds itself in a familiar but dangerous position: thoughtful, principled, and increasingly irrelevant.</p>
+      <p>The European Union has positioned itself as the global leader in AI regulation, ethics and digital rights. Its landmark AI Act is the world's most comprehensive attempt to govern artificial intelligence before its full consequences are felt. While this approach reflects Europe's commitment to democratic values and human dignity, it also exposes a growing strategic weakness. At a time when the US and China are building, deploying and scaling AI at speed, Europe risks becoming a rule-maker without real influence over the technology it seeks to constrain.</p>
+      <p>The contrast between the three powers is stark. In the United States, AI development is driven by a powerful alliance between Silicon Valley, venture capital and the federal government. Companies like OpenAI, Google, Meta and Nvidia dominate the global AI ecosystem, attracting talent, capital and compute at a scale unmatched elsewhere. While regulation exists, it is reactive and light-touch, designed to avoid stifling innovation. The result is a system that prioritises speed, experimentation and commercial dominance.</p>
+      <p>China, meanwhile, has taken a different but equally decisive path. AI is embedded within its national industrial strategy, supported by massive state investment, data access and political coordination. Chinese firms such as Baidu, Alibaba and Tencent operate within an ecosystem that tightly integrates government priorities with technological development. The state's ability to mobilise resources and data gives China a unique advantage in deploying AI at scale, particularly in surveillance, logistics and military applications.</p>
+      <p>Europe, by contrast, has focused overwhelmingly on risk mitigation. The AI Act categorises systems by potential harm, imposes strict compliance requirements, and threatens heavy fines for misuse. In theory, this could set global norms, much as GDPR did for data protection. In practice, however, Europe lacks the domestic AI champions needed to turn regulatory leadership into strategic power. Few European firms are building frontier models, controlling large-scale compute, or shaping the global AI supply chain.</p>
+      <p>This imbalance creates a troubling paradox. Europe is attempting to regulate technologies that are largely designed, trained and owned elsewhere. While American and Chinese firms innovate first and comply later, European startups face higher barriers from the outset. The result is not safer AI globally, but weaker AI capacity locally. Regulation without competitiveness risks entrenching dependence rather than preventing harm.</p>
+      <p>The implications extend far beyond economics. AI will shape military capability, intelligence analysis, cyber defence and diplomatic leverage. States that control advanced AI systems will enjoy advantages in decision-making speed, strategic forecasting and battlefield coordination. Europe's reliance on NATO and, by extension, US technological leadership already limits its strategic autonomy. Falling behind in AI deepens this dependency at a moment when geopolitical fragmentation is accelerating.</p>
+      <p>There is also a democratic dimension. Europe rightly worries about algorithmic bias, surveillance and the erosion of civil liberties. But democratic values are not protected by abstention. If liberal democracies fail to develop their own AI systems, the norms embedded in future technologies will be set elsewhere — by profit-driven American firms or authoritarian Chinese institutions. Values must be encoded through participation, not observation.</p>
+      <p>To be clear, Europe's regulatory instincts are not misguided. Unchecked AI development carries real risks: mass surveillance, labour displacement, disinformation and concentration of power. But regulation must be paired with ambition. At present, Europe behaves like a referee in a game it no longer plays. What is missing is a serious industrial strategy for AI — one that matches ethical leadership with technological capacity.</p>
+      <p>Such a strategy would require uncomfortable political choices. It would mean large-scale public investment in compute infrastructure, greater tolerance for risk, and deeper coordination between EU member states. It would involve reforming capital markets to support high-growth tech firms and attracting global AI talent at scale. Most controversially, it would require accepting that some regulatory flexibility is necessary if Europe wants to remain competitive.</p>
+      <p>Without this shift, Europe faces a future as a digital dependency zone: consuming AI technologies developed elsewhere, enforcing rules it struggles to uphold, and reacting to geopolitical shocks rather than shaping them. The history of technological revolutions is unforgiving to late movers. Those who hesitate rarely catch up.</p>
+      <p>Artificial intelligence is not just another policy area; it is the terrain on which future power will be exercised. The US and China understand this. Europe, for all its normative strength, risks mistaking moral clarity for strategic leadership. If it continues to prioritise control over creation, it may find that the AI age arrives without it.</p>
+    </div>
+  </div>
+
+  <!-- FULL ARTICLE: GILL -->
+  <div class="article-full" id="art-gill">
+    <button class="back-btn" onclick="closeArticle()">← Back to articles</button>
+    <div class="art-tag">Security &amp; Democracy &nbsp;·&nbsp; Opinion</div>
+    <h2>The Silence Is the Scandal: Nathan Gill, Russia, and Britain's Dangerous Complacency</h2>
+    <hr class="rule">
+    <div class="article-body">
+      <p class="drop-cap">If a senior politician were jailed for links to hostile foreign interests during the Cold War, it would have triggered a national reckoning. Parliamentary inquiries, wall-to-wall media coverage, and public outrage would have followed. Yet today, in a Britain supposedly more alert to geopolitical threats than ever before, the jailing of Nathan Gill has passed with barely a ripple.</p>
+      <p>Gill, a former MEP, senior figure in UKIP, and once a visible presence in British and European politics, was convicted and imprisoned following serious criminal proceedings. The details of the case raise deeply troubling questions about foreign influence, political integrity, and national security. And yet, outside a handful of reports, his downfall has largely escaped sustained media scrutiny. That silence, more than the crime itself, should alarm us.</p>
+      <p>This is not about one man. It is about a pattern — and a growing one. Across Britain and Europe, evidence continues to mount that Russia has sought to influence democratic systems through money, disinformation, kompromat and political cultivation. The shock is no longer that these attempts exist, but how easily they fade from public attention once the headlines move on.</p>
+      <p>Russia's strategy is not subtle. It does not rely on tanks crossing borders alone, but on eroding trust from within. It targets political systems already weakened by polarisation, cynicism and declining faith in institutions. The aim is not necessarily to install pro-Kremlin governments, but to foster confusion, paralysis and division. A democracy that cannot agree on what constitutes a scandal is a democracy already compromised.</p>
+      <p>Nathan Gill's case should have been a moment of clarity. Here was a figure who once shaped political discourse, now exposed by the justice system. Yet the lack of sustained outrage suggests something more disturbing: that Britain has become numb to foreign interference, treating it as background noise rather than an existential threat. We have normalised what should still shock us.</p>
+      <p>The contrast with other scandals is telling. Personal misconduct, expenses claims, or internal party disputes routinely dominate front pages for weeks. But when the issue involves foreign states probing the weaknesses of our political system, the response is muted. This reflects a broader failure to treat national security as a democratic concern rather than a niche intelligence issue.</p>
+      <p>Europe faces the same problem, magnified. From far-right parties receiving opaque funding, to politicians acting as "observers" in sham elections, to disinformation campaigns targeting voters at scale, the continent has repeatedly been warned about Russian interference. Intelligence agencies have spoken openly about it. Investigative journalists have documented it. And still, political consequences are often limited, delayed, or quietly absorbed.</p>
+      <p>Part of the issue lies with the media ecosystem itself. Russian interference stories are complex, legally sensitive, and rarely deliver instant emotional payoff. They require patience, context and persistence. In a media environment driven by clicks and outrage cycles, they struggle to compete. But this is precisely why they demand greater attention, not less. The health of democratic systems cannot be judged by engagement metrics alone.</p>
+      <p>There is also an uncomfortable political reality. Acknowledging the scale of interference means admitting institutional failure: that safeguards were weak, oversight insufficient, and warnings ignored. It is easier to frame such cases as isolated incidents than as symptoms of a systemic vulnerability. But denial carries its own cost.</p>
+      <p>The danger is not only external. When voters perceive that foreign influence scandals are met with indifference, trust erodes further. People begin to assume that corruption is inevitable, that power protects itself, and that democracy is little more than theatre. This cynicism is not accidental; it is the desired outcome of interference campaigns.</p>
+      <p>Britain, in particular, cannot afford complacency. As a country that prides itself on parliamentary tradition and democratic resilience, it should be leading efforts to expose, investigate and punish foreign political interference. That requires not only legal action, but cultural seriousness — treating these cases as defining moments rather than awkward footnotes.</p>
+      <p>The jailing of Nathan Gill should have sparked a national conversation about who gets access to power, how political networks are monitored, and whether existing safeguards are fit for purpose. Instead, it passed quietly, absorbed into the churn of news. That is a failure not just of politics, but of attention.</p>
+      <p>Russia does not need to win elections in Britain or Europe to succeed. It merely needs democratic societies to stop caring when their systems are compromised. When outrage fades too quickly, when scrutiny is half-hearted, and when silence follows conviction, the strategy works.</p>
+      <p>The real scandal is not that foreign states attempt to interfere; that has always been true. The scandal is that we seem increasingly willing to look away when they succeed. If democracy is to mean anything in the age of hybrid warfare, it must be defended not only at the ballot box, but in the stories we choose to tell — and the ones we allow to disappear.</p>
+    </div>
+  </div>
+
+  <!-- FULL ARTICLE: EU 2025 -->
+  <div class="article-full" id="art-eu2025">
+    <button class="back-btn" onclick="closeArticle()">← Back to articles</button>
+    <div class="art-tag">European Union &nbsp;·&nbsp; Essay &nbsp;·&nbsp; Project Newsroom Europe</div>
+    <h2>The Greatest Challenge Facing the EU in 2025</h2>
+    <hr class="rule">
+    <div class="article-body">
+      <p class="drop-cap">To me, the clearest and greatest challenge facing the European Union in 2025 was coming to terms with the reality that it can no longer take its alliance with the United States of America for granted. In early 2025, it became increasingly clear that the US, under a renewed Trump presidency, was prioritising domestic interests over its traditional role as a global guarantor. This shift was symbolised by the slashing of USAID funding in January, signalling a retreat from international engagement and development commitments.</p>
+      <p>While Europe may initially have believed itself relatively insulated from direct criticism or consequence, that assumption was decisively challenged in February at the Munich Security Conference, when Vice President JD Vance delivered a confrontational speech that laid bare a more transactional and sceptical US approach to European affairs.</p>
+      <p>What followed was a period of sharp recalibration for the EU. The imposition of punitive tariffs, combined with renewed criticism of NATO and demands that member states commit up to 5% of GDP to defence spending, forced difficult conversations across Europe about security and responsibility. In Ireland, these debates took on a philosophical dimension. As a country that is militarily neutral but not politically neutral, increased EU defence coordination challenged long-standing assumptions about what neutrality means in practice. Questions around defence spending and participation in EU security initiatives were not only technical budgetary issues, but fundamental debates about Ireland's values and role within the European project.</p>
+      <p>The central challenge facing the EU in 2025, therefore, was not merely responding to American pressure, but confronting the structural vulnerabilities and threats to values that decades of reliance had created.</p>
+      <p>This challenge extends beyond defence and into emerging strategic domains such as artificial intelligence. As the US and China accelerate ahead in the global AI race, Europe risks once again finding itself dependent on external powers for critical technologies. Without decisive investment and coordination, the EU may be left reacting to rules set elsewhere.</p>
+    </div>
+  </div>
+
+  <!-- FULL ARTICLE: TEMPLI -->
+  <div class="article-full" id="art-templi">
+    <button class="back-btn" onclick="closeArticle()">← Back to articles</button>
+    <div class="art-tag">Technology &nbsp;·&nbsp; Reported Feature</div>
+    <h2>AI Moves Into Advisory Compliance as Financial Firms Automate Reporting</h2>
+    <hr class="rule">
+    <div class="article-body">
+      <p class="drop-cap">Artificial intelligence is increasingly being used in financial services to automate document-heavy compliance tasks, as firms seek to cut costs and free up advisers' time amid growing regulatory pressure.</p>
+      <p>While banks and insurers have experimented with AI for fraud detection and customer service, newer tools are moving into core advisory workflows, including suitability reports: lengthy, regulator-mandated documents that explain why a particular product or investment is appropriate for a client.</p>
+      <p>Most advisers still rely on manual Microsoft Word templates to produce these reports, a process that can take hours or even days depending on intricacy. Advances in generative AI have created opportunities for automation by making it easier to synthesise information from multiple data sources.</p>
+      <p>One example is Templi, a UK-based company launched in December 2024, which uses AI to automate the drafting of suitability reports for financial advisers, insurance brokers and mortgage brokers.</p>
+      <p>Templi chief executive and financial adviser Jack Sleator said: "Suitability report writing was probably the slowest and most manual task we did. Advisers were essentially writing essays, pulling information from multiple systems and populating Word templates by hand."</p>
+      <p>Templi allows firms to upload their existing report templates and uses AI to populate them using client data and supporting documents, while keeping formatting and house style intact. The system relies on widely used large language models combined with document-reading tools, rather than proprietary AI.</p>
+      <p>The time savings can be substantial. Sleator said one client reduced the time to produce an annual review report from three hours to ten minutes with Templi.</p>
+      <p>Adoption of AI tools across the advice sector is rising, although uptake remains uneven. "About a year ago, roughly 30 per cent of advisers were using AI in some form," Sleator said, noting that this could range from informal use of chatbots to more integrated systems. "From what we're seeing, that appetite is only increasing."</p>
+      <p>Industry interest reflects a broader shift in financial services, where firms face pressure to improve efficiency while maintaining compliance standards. Tasks involving structured information, documents and repeatable processes are particularly well suited to automation.</p>
+      <p>Sleator said: "Financial services is one of the industries where AI works best. A lot of the work is document-heavy — taking information, processing it, and repurposing it into regulated formats."</p>
+      <p>However, companies developing such tools stress that AI is intended to support, rather than replace, professional judgement. Sleator added: "We see Templi as an enabler for human-led advice. It's about removing admin so advisers can spend more time actually advising clients."</p>
+      <p>Over the next year, Templi plans to expand its software beyond report writing to include meeting transcription, compliance checks and deeper integration with advisers' back-office systems. The direction of travel, Sleator argues, is towards AI becoming a standard part of advisory operations.</p>
+      <p>He said: "If advisers can reduce costs and scale more efficiently, they can serve more clients and keep independent advice viable."</p>
+    </div>
+  </div>
+
+</div><!-- end geopolitics -->
+
+<!-- ===== NCTJ ===== -->
+<div class="section" id="nctj">
+  <div class="section-label">NCTJ Portfolio &nbsp;·&nbsp; PA Media Academy</div>
+
+  <div class="article-index">
+    <div class="tag">Feature &nbsp;·&nbsp; Lifestyle</div>
+    <h3>Alcohol-Free Social Group Braves the Winter Sea</h3>
+    <p>Dozens of young people traded a boozy night out for an early morning ice-cold sea swim on the shores of Belfast Lough. For a growing number of twenty-somethings, sober socials — winter swims, hill hikes, run clubs — are a new alternative to the Friday night pub crawl.</p>
+    <button class="read-btn" onclick="openNctj('sober')">Read Article →</button>
+  </div>
+
+  <div class="article-index">
+    <div class="tag">News &nbsp;·&nbsp; Royal Affairs</div>
+    <h3>King Charles Welcomes Trump to Windsor — Hailing an 'Unparalleled Partnership'</h3>
+    <p>King Charles III celebrated the UK's relationship with the USA as he welcomed President Donald Trump and First Lady Melania to Windsor Castle for their second State Visit. A 241-word hard news report produced to professional editorial standards.</p>
+    <button class="read-btn" onclick="openNctj('king')">Read Article →</button>
+  </div>
+
+  <div class="article-full" id="nctj-sober">
+    <button class="back-btn" onclick="closeNctj()">← Back to articles</button>
+    <div class="art-tag">Feature &nbsp;·&nbsp; Lifestyle</div>
+    <h2>Alcohol-Free Social Group Braves the Winter Sea</h2>
+    <hr class="rule">
+    <div class="article-body">
+      <p class="drop-cap">Dozens of young people traded a boozy night out for an early morning and an ice-cold sea swim on the shores of Belfast Lough on Sunday.</p>
+      <p>It's exactly the kind of event that would have seemed unthinkable to a previous generation of twenty-somethings. But for a growing number of young people across Belfast and beyond, sober socials — think winter swims, hill hikes, and run clubs — are a new alternative to the Friday night pub crawl.</p>
+      <p>The event was organised by Eamon Swail, 23, and Calvin Brennan, 31, founders of two Belfast-based sober social groups — Sober Social and Sole Movement — which bring young people together to connect without the need to drink, at a time when half of young adults now choose no- and low-alcohol options, according to Drinkaware.</p>
+      <p>Swail, a personal trainer, created Sober Social when he struggled to enjoy going to pubs after trying sobriety in early 2025. He said: "I just didn't enjoy going out. My weekends — I'm doing nothing here. I would go for a sea dip on my own, but everything is better as a shared experience."</p>
+      <p>The sea dip is one of many Sober Social events which have included hikes, quiz nights, and a weekly run club. The meetup also included breathing exercises and mini games on the beach led by Brennan.</p>
+      <p>Brennan works as a callisthenics coach, training people to use their own bodyweight for exercise. But after several years, he found he was losing touch with nature and spending too much time indoors in the gym. He said: "I found a big imbalance with my work life and my lifestyle. I was forgetting to get into nature and spend more time living a natural lifestyle."</p>
+      <p>This changed during Covid, when Brennan completed the Seven Summits challenge — climbing the seven tallest peaks of the Mourne mountains in one day — barefoot as a fundraiser. After completing the challenge, Brennan decided to form Sole Movement, a group that focuses on mental wellbeing by connecting with others and with nature. He said: "I decided to create a place for a community to come together, embrace explorative movement, and connect with more like-minded people."</p>
+      <p>After Sunday's event, Brennan said: "Everyone had tremendous fun, there was plenty of laughter."</p>
+      <p>Swail added: "Today was brilliant. A cold November morning and we were able to get 50+ people out to Helen's Bay. It's so refreshing to be able to get out and socialise with people your own age in a healthy way."</p>
+      <p>Sober Social has gained nearly 6,000 Instagram followers since its first event in May and has brought together young people from Belfast and beyond — including Jamie Earley, 24, who travelled all the way from Oranmore, County Galway, for his fifth event.</p>
+      <p>Earley heard about Sober Social on Instagram and enjoyed his first meetup so much that he wanted to come back for more. He said: "I decided to come as much as I could. Something that doesn't involve drinking just appealed to me. You're making proper connections with people."</p>
+      <p>On future socials, Swail hopes to lead a sober night out in Belfast, saying: "Cathedral Quarter is beautiful, especially around Christmas, but you don't want to go there and feel like you have to drink, or you might feel out of place." He said that a sober night out on the town would show that you can still go out and have fun without drinking.</p>
+      <p>Both Swail and Brennan have since collaborated again, meeting at Boulder World in Belfast. Their communities and announcements on future events can be found on Instagram, with the handles <em>sobersocial_</em> and <em>solemovement.lifestyle</em>.</p>
+    </div>
+  </div>
+
+  <div class="article-full" id="nctj-king">
+    <button class="back-btn" onclick="closeNctj()">← Back to articles</button>
+    <div class="art-tag">News &nbsp;·&nbsp; Royal Affairs &nbsp;·&nbsp; 241 words</div>
+    <h2>King Charles Welcomes Trump to Windsor — Hailing an 'Unparalleled Partnership'</h2>
+    <hr class="rule">
+    <div class="article-body">
+      <p class="drop-cap">King Charles III celebrated the UK's 'unparalleled partnership' with the USA as he welcomed President Donald Trump to Windsor Castle last night.</p>
+      <p>A banquet was held for President Trump and First Lady Melania during their unprecedented second State Visit to the UK.</p>
+      <p>Welcoming them, King Charles recognised the growth in bond between the nations since the American War for Independence. He said: "We celebrate a relationship between our two countries that surely neither [George] Washington nor King George III could possibly have imagined."</p>
+      <p>The King noted shared successes in areas including science and culture. He also hailed the two countries for having the 'closest defence, security and intelligence relationship ever known', likening the alliances in both World Wars to the shared solidarity with Ukraine today.</p>
+      <p>Approaching the 250th anniversary of the USA's Declaration of Independence, King Charles shared his vision for the UK's future relationship with America. He said that the goal for the next 250 years is to restore the natural wonders of both countries for future generations.</p>
+      <p>"We share the ambition, and determination, to preserve our majestic lands and waters; above all, to ensure that we have clean water, clean air and clean food."</p>
+      <p>The King finished by saying: "As we celebrate this unparalleled partnership, allow me to propose a toast — to President Trump and the First Lady, and to the health, prosperity and happiness of the people of the United States of America."</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== IRISH NEWS ===== -->
+<div class="section" id="irishnews">
+  <div class="section-label">The Irish News &nbsp;·&nbsp; May 2025 Internship</div>
+  <div class="two-col">
+    <div class="article-index">
+      <div class="tag">Northern Ireland &nbsp;·&nbsp; Language &amp; Culture</div>
+      <h3>More Than 50 Irish Language Representatives Meet in Belfast to Discuss Funding Crisis</h3>
+      <a class="read-link" href="https://www.irishnews.com/news/northern-ireland/more-than-50-irish-language-representatives-meet-in-belfast-to-discuss-funding-crisis-WZFAA3QEANFLFGDDGEXBWHAOGU/" target="_blank">Read on The Irish News →</a>
+    </div>
+    <div class="article-index">
+      <div class="tag">Northern Ireland &nbsp;·&nbsp; Arts &amp; Community</div>
+      <h3>40,000 Square Foot Creative Community Hub Opens in Belfast City Centre</h3>
+      <a class="read-link" href="https://www.irishnews.com/news/northern-ireland/40000-square-foot-creative-community-hub-opens-in-belfast-city-centre-2MDLBDOQRZGOLPV6BOZX6H6AH4/" target="_blank">Read on The Irish News →</a>
+    </div>
+    <div class="article-index">
+      <div class="tag">Northern Ireland &nbsp;·&nbsp; Arts</div>
+      <h3>Renowned French Musician Brings Workshop to Antrim Coast</h3>
+      <a class="read-link" href="https://www.irishnews.com/news/northern-ireland/renowned-french-musician-brings-workshop-to-antrim-coast-MAFN6ANDR5EL3E66T4ZOQUWDKQ/" target="_blank">Read on The Irish News →</a>
+    </div>
+    <div class="article-index">
+      <div class="tag">International &nbsp;·&nbsp; Conflict</div>
+      <h3>Archbishops Urge International Community to 'Grasp Reality' Over Gaza Humanitarian Crisis</h3>
+      <a class="read-link" href="https://www.irishnews.com/news/northern-ireland/archbishops-urge-international-community-to-grasp-reality-in-response-to-humanitarian-crisis-in-gaza-6S2Q3FKSJFC67EQJUJEXDPTLZA/" target="_blank">Read on The Irish News →</a>
+    </div>
+    <div class="article-index">
+      <div class="tag">Ireland &nbsp;·&nbsp; Health Policy</div>
+      <h3>Irish Heart Foundation Urges Fast-Tracking of All-Island Ban on Disposable Vapes</h3>
+      <a class="read-link" href="https://www.irishnews.com/news/ireland/irish-heart-foundation-urges-fast-tracking-in-all-island-banning-of-disposable-vapes-DQZQRGH3EZAOZM6MDOIEYBDQQE/" target="_blank">Read on The Irish News →</a>
+    </div>
+    <div class="article-index">
+      <div class="tag">Northern Ireland &nbsp;·&nbsp; Sport &amp; Travel</div>
+      <h3>Going to The Open Golf in Portrush? Here's Everything You Need to Know</h3>
+      <a class="read-link" href="https://www.irishnews.com/news/northern-ireland/going-to-the-open-golf-in-portrush-heres-all-you-need-to-know-to-plan-H7VOBUKXVZFMNDODLYDQTF4TGU/" target="_blank">Read on The Irish News →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TIKTOK ===== -->
+<div class="section" id="tiktok">
+  <div class="tiktok-hero">
+    <div>
+      <h2>Short-Form Geopolitical Content</h2>
+      <p>Between February and September 2025, I researched, scripted and published short-form video content on TikTok explaining EU affairs and international developments to a non-specialist audience. I used engagement analytics — watch time, drop-off rates, share patterns — to refine delivery, headlines and editorial judgement over time.</p>
+      <div class="tiktok-stats">
+        <div class="tiktok-stat"><strong>EU &amp; Global</strong><span>Topics covered</span></div>
+        <div class="tiktok-stat"><strong>Feb–Sep</strong><span>2025</span></div>
+        <div class="tiktok-stat"><strong>Data-led</strong><span>Editorial approach</span></div>
+      </div>
+    </div>
+    <a class="tiktok-btn" href="https://www.tiktok.com/@sheenglobal" target="_blank">View Channel →</a>
+  </div>
+</div>
+
+<footer>
+  Oisín Cahalane &nbsp;·&nbsp; oisincahalane@gmail.com &nbsp;·&nbsp; London, UK &nbsp;·&nbsp; 2026
+</footer>
+
+<script>
+  function showSection(id, el) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    el.classList.add('active');
+  }
+
+  function openArticle(id) {
+    document.getElementById('geo-index').style.display = 'none';
+    document.querySelectorAll('#geopolitics .article-full').forEach(a => a.classList.remove('active'));
+    document.getElementById('art-' + id).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function closeArticle() {
+    document.getElementById('geo-index').style.display = 'block';
+    document.querySelectorAll('#geopolitics .article-full').forEach(a => a.classList.remove('active'));
+    window.scrollTo(0, 0);
+  }
+
+  function openNctj(id) {
+    document.querySelectorAll('#nctj .article-index').forEach(a => a.style.display = 'none');
+    document.querySelectorAll('#nctj .section-label').forEach(a => a.style.display = 'none');
+    document.querySelectorAll('#nctj .article-full').forEach(a => a.classList.remove('active'));
+    document.getElementById('nctj-' + id).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function closeNctj() {
+    document.querySelectorAll('#nctj .article-index').forEach(a => a.style.display = 'block');
+    document.querySelectorAll('#nctj .section-label').forEach(a => a.style.display = 'flex');
+    document.querySelectorAll('#nctj .article-full').forEach(a => a.classList.remove('active'));
+    window.scrollTo(0, 0);
+  }
+</script>
+</body>
+</html>
